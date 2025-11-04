@@ -1,3 +1,4 @@
+from datetime import datetime
 from pydantic import BaseModel, Field
 from agents import Agent
 
@@ -7,10 +8,12 @@ INSTRUCTIONS = (
     "You should first come up with an outline for the report that describes the structure and "
     "flow of the report. Then, generate the report and return that as your final output.\n"
     "The final output should be in markdown format, and it should be lengthy and detailed. Aim "
-    "for 5-10 pages of content, at least 1000 words."
+    "for 5-10 pages of content, at least 1000 words. "
+    "The report should be date with the current date.\n"
+    f"The current datetime is {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
 )
 
-
+# 
 class ReportData(BaseModel):
     short_summary: str = Field(description="A short 2-3 sentence summary of the findings.")
 
