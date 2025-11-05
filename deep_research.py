@@ -31,7 +31,7 @@ def check_if_fields_have_input(query: str, email: str):
     return gr.update(interactive=has_input)
 
 
-with gr.Blocks(theme=gr.themes.Glass(primary_hue="purple")) as ui:
+with gr.Blocks(theme=gr.themes.Glass(primary_hue="indigo")) as ui:
     gr.Markdown("# Deep Research")
     query_textbox = gr.Textbox(
         label="I am your research assistant. What topic would you like to research?",
