@@ -7,7 +7,7 @@ from agents import Agent, function_tool
 
 
 def is_valid_email(email: str) -> bool:
-    """Validate email format using regex."""
+    """Validate email format using regular expressions."""
     if not email or not email.strip():
         return False
     email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'

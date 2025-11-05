@@ -1,3 +1,9 @@
+---
+title: deep_research
+app_file: deep_research.py
+sdk: gradio
+sdk_version: 5.49.1
+---
 # Deep Research
 
 AI Agents that research a given topic, generate a report in markdown, and email it to the user.

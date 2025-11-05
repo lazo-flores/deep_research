@@ -1,22 +1,7 @@
 # Main dependencies for deep_research project
 gradio==5.49.1
 python-dotenv==1.2.1
-openai==2.6.1
+openai[agents]==2.6.1
 pydantic==2.11.10
 mailjet-rest==1.5.1
-
-# IMPORTANT: MISSING 'agents' MODULE
-# ===================================
-# The 'agents' package (providing Agent, WebSearchTool, Runner, trace, gen_trace_id)
-# is NOT available as a standard PyPI package compatible with this code.
-#
-# To resolve the "ModuleNotFoundError: No module named 'agents'" error:
-#
-# Option 1: Check your course materials for specific installation instructions
-# Option 2: The agents SDK may need to be installed from GitHub:
-#   pip install git+https://github.com/openai/openai-python.git
-#   (Then import from openai instead of agents)
-# Option 3: You may need to update the imports to use the correct OpenAI SDK syntax
-#
-# The code currently imports from the wrong package - check if your course
-# provides updated code or additional setup instructions.
+openai-agents>=0.4.2
