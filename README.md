@@ -2,17 +2,25 @@
 title: deep_research
 app_file: deep_research.py
 sdk: gradio
-sdk_version: 5.49.1
+sdk_version: 4.44.1
 ---
 # Deep Research
 
 AI Agents that research a given topic, generate a report in markdown, and email it to the user.
 
+## Features
+
+- 🔍 Automated web research using OpenAI agents
+- 📝 Generates comprehensive markdown reports
+- 📧 Email delivery of research reports
+- 🚀 Deployed on Hugging Face Spaces with automatic GitHub integration
+- 💬 Interactive Gradio chat interface
+
 ## Setup
 
 ### Prerequisites
 
-- Python 3.11 or higher
+- Python 3.11 or higher (tested with Python 3.12)
 - An OpenAI API key
 - Mailjet API credentials (for email functionality)
 
@@ -23,7 +31,7 @@ AI Agents that research a given topic, generate a report in markdown, and email 
    ```bash
    # Using uv (recommended)
    uv sync
-   
+
    # OR using pip
    pip install -r requirements.txt
    ```
@@ -38,35 +46,35 @@ AI Agents that research a given topic, generate a report in markdown, and email 
    MAILJET_SECRET_KEY=your_mailjet_secret_key_here
    ```
 
-3. **Resolve the 'agents' module issue:**
-
-   ⚠️ **IMPORTANT:** The project currently has a missing dependency issue with the `agents` module.
-
-   The imports `from agents import Agent, WebSearchTool, Runner, trace, gen_trace_id` are looking for an OpenAI agents SDK package that is not available as a standard PyPI package.
-
-   **To fix this, you have two options:**
-
-   **Option A: Check your course materials**
-   - Your Udemy course or source may provide specific installation instructions
-   - Look for additional setup steps or code updates
-
-   **Option B: Install from OpenAI GitHub (if applicable)**
-   ```bash
-   pip install git+https://github.com/openai/openai-python.git
-   ```
-   
-   Note: This may require updating the import statements in the code.
-
 ### Running the Application
 
-Once the `agents` module issue is resolved:
+```bash
+# Using uv (recommended)
+uv run deep_research.py
+
+# OR activate the virtual environment first
+source .venv/bin/activate
+python deep_research.py
+```
+
+The application will start a local Gradio server, typically at `http://localhost:7860`.
+
+## Deployment
+
+### Hugging Face Spaces
+
+This project is configured for automatic deployment to Hugging Face Spaces via GitHub Actions. When you push changes to the main branch, GitHub Actions automatically syncs your app to Hugging Face.
+
+### Manual Deployment
+
+To manually deploy to Hugging Face Spaces:
 
 ```bash
-# Using uv
-uv run python deep_research.py
+# Activate your environment first (if not using uv run)
+source .venv/bin/activate
 
-# OR using Python directly
-python deep_research.py
+# Deploy using gradio CLI
+gradio deploy
 ```
 
 ## Project Structure
@@ -78,6 +86,33 @@ python deep_research.py
 - `writer_agent.py` - Generates research reports
 - `email_agent.py` - Sends email reports
 
-## Dependencies
+## Key Dependencies
 
-See `requirements.txt` for the list of required packages.
+- `gradio==4.44.1` - Web UI framework
+- `openai>=1.54.0` - OpenAI API client
+- `openai-agents>=0.4.2` - OpenAI agents framework
+- `huggingface-hub==0.22.2` - Hugging Face integration (pinned for compatibility)
+- `pydantic>=2.0.0` - Data validation
+- `mailjet-rest>=1.3.0` - Email delivery
+- `typer>=0.20.0` - CLI support
+
+See `requirements.txt` for the complete list of dependencies.
+
+## Troubleshooting
+
+### Import Errors
+
+If you encounter import errors, ensure you're running the application with `uv run` or from within an activated virtual environment:
+
+```bash
+# Option 1: Use uv run
+uv run deep_research.py
+
+# Option 2: Activate environment first
+source .venv/bin/activate
+python deep_research.py
+```
+
+### Version Compatibility
+
+This project uses specific version pins to ensure compatibility between `gradio` and `huggingface-hub`. If you need to upgrade dependencies, test thoroughly before deploying.
