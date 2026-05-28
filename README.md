@@ -3,6 +3,7 @@ title: deep_research
 app_file: deep_research.py
 sdk: gradio
 sdk_version: 5.49.1
+python_version: "3.12"
 ---
 # Deep Research
 
