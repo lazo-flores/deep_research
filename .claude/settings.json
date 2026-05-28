@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "file=$(jq -r '.tool_input.file_path // \"\"'); case \"$file\" in *requirements.txt|*pyproject.toml) echo '{\"systemMessage\":\"\u26a0\ufe0f  Dependency file edited \u2014 run uv lock to keep uv.lock in sync.\",\"hookSpecificOutput\":{\"hookEventName\":\"PostToolUse\",\"additionalContext\":\"A dependency file was just edited (requirements.txt or pyproject.toml). Before considering the task complete, run uv lock (or uv lock --upgrade-package <name> for a targeted upgrade) so uv.lock stays in sync. Otherwise local installs will silently use the OLD versions and HF Spaces (which installs from requirements.txt directly) will diverge from local tests.\"}}' ;; esac; exit 0"
+          }
+        ]
+      }
+    ]
+  }
+}
