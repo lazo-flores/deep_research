@@ -1,9 +1,28 @@
+import os
+import sys
 import gradio as gr
 from dotenv import load_dotenv
 from research_manager import ResearchManager
 from email_agent import set_recipient_email, is_valid_email
 
 load_dotenv(override=True)
+
+# Suppress the harmless asyncio finalizer noise on HF Spaces (Python 3.12 +
+# Gradio 6 SSR garbage-collects an event loop whose self-pipe is already
+# closed). Leaves every other unraisable exception visible.
+_default_unraisablehook = sys.unraisablehook
+
+
+def _silence_invalid_fd(unraisable):
+    exc = unraisable.exc_value
+    if isinstance(exc, ValueError) and "Invalid file descriptor" in str(exc):
+        return
+    _default_unraisablehook(unraisable)
+
+
+sys.unraisablehook = _silence_invalid_fd
+
+ON_HF_SPACES = bool(os.environ.get("SPACE_ID"))
 
 
 async def run(query: str, email: str = ""):
@@ -71,4 +90,8 @@ with gr.Blocks() as ui:
         outputs=clear_button
     )
 
-ui.launch(share=True, inbrowser=True, theme=gr.themes.Glass(primary_hue="indigo"))
+ui.launch(
+    share=not ON_HF_SPACES,
+    inbrowser=not ON_HF_SPACES,
+    theme=gr.themes.Glass(primary_hue="indigo"),
+)
