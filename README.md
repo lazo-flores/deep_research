@@ -2,7 +2,7 @@
 title: deep_research
 app_file: deep_research.py
 sdk: gradio
-sdk_version: 4.44.1
+sdk_version: 5.49.1
 ---
 # Deep Research
 
@@ -88,10 +88,10 @@ gradio deploy
 
 ## Key Dependencies
 
-- `gradio==4.44.1` - Web UI framework
+- `gradio==5.49.1` - Web UI framework
 - `openai>=1.54.0` - OpenAI API client
 - `openai-agents>=0.4.2` - OpenAI agents framework
-- `huggingface-hub==0.22.2` - Hugging Face integration (pinned for compatibility)
+- `huggingface-hub>=0.25.0` - Hugging Face integration
 - `pydantic>=2.0.0` - Data validation
 - `mailjet-rest>=1.3.0` - Email delivery
 - `typer>=0.20.0` - CLI support

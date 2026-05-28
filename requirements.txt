@@ -1,9 +1,9 @@
 # Main dependencies for deep_research project
-gradio==4.44.1
+gradio==5.49.1
 python-dotenv==1.2.1
 openai==2.6.1
 pydantic==2.11.10
 mailjet-rest==1.5.1
 openai-agents>=0.4.2
-huggingface-hub==0.22.2
+huggingface-hub>=0.25.0
 typer>=0.20.0
